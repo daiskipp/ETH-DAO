@@ -217,7 +217,7 @@ useEffect(() => {
     );
   }
   // テストネットが Sepolia ではなかった場合に警告を表示
-  else if (address && network && network?.data?.chain?.id !== 11155111) {
+  else if (address && network && network.data && network.data.chain && network.data.chain.id !== 11155111) {
     console.log('wallet address: ', address);
     console.log('network: ', network?.data?.chain?.id);
 
