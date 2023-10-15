@@ -217,7 +217,7 @@ useEffect(() => {
     );
   }
   // テストネットが Sepolia ではなかった場合に警告を表示
-  else if (address && network && network.data && network.data.chain && network.data.chain.id !== 11155111) {
+  else if (address && network && network.data && network.data?.chain?.id !== 11155111) {
     console.log('wallet address: ', address);
     console.log('network: ', network?.data?.chain?.id);
 
@@ -235,6 +235,8 @@ useEffect(() => {
 // ユーザーがすでに NFT を要求している場合は、内部 DAO ページを表示します
 // これは DAO メンバーだけが見ることができ、すべてのメンバーとすべてのトークン量をレンダリングします
 else if (hasClaimedNFT){
+  console.log('network1: ', network?.data?.chain?.id);
+  console.log('network2: ', network?.data);
   return (
     <div className={styles.container}>
       <main className={styles.main}>
