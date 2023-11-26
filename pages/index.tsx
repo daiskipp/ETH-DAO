@@ -29,7 +29,7 @@ const Home: NextPage = () => {
     'token',
   ).contract;
 
-  // 投票コントラクトの初期化
+  // 投票コントラクトの初期化 ガバナンスコントラクト
   const vote = useContract(
     '0xcBF47D21BcF4761D559D8eC2fB1D8cB3C80A52F3',
     'vote',
@@ -45,6 +45,7 @@ const Home: NextPage = () => {
   const [memberTokenAmounts, setMemberTokenAmounts] = useState<any>([]);
   
   // DAO メンバーのアドレスをステートで宣言
+
   const [memberAddresses, setMemberAddresses] = useState<string[] | undefined>([]);
 
   const [proposals, setProposals] = useState<Proposal[]>([]);
@@ -170,6 +171,7 @@ useEffect(() => {
     const checkBalance = async () => {
       try {
         const balance = await editionDrop!.balanceOf(address, 0);
+        console.log('balance', balance)
         if (balance.gt(0)) {
           setHasClaimedNFT(true);
           console.log('🌟 this user has a membership NFT!');
@@ -177,6 +179,7 @@ useEffect(() => {
           setHasClaimedNFT(false);
           console.log("😭 this user doesn't have a membership NFT.");
         }
+        console.log('balance', balance)
       } catch (error) {
         setHasClaimedNFT(false);
         console.error('Failed to get balance', error);
@@ -343,7 +346,8 @@ else if (hasClaimedNFT){
             >
               {proposals.map((proposal) => (
                 <div key={proposal.proposalId.toString()} className="card">
-                  <h5>{proposal.description}</h5>
+                  <h5>{proposal.description} -- <strong style={{ color: 'red' }}>{proposal.state === 1 ? 'Active' : proposal.state === 2 ? 'Canceled' : proposal.state === 3 ? 'Defeated' : proposal.state === 4 ? 'Succeeded' : proposal.state === 5 ? 'Queued' : proposal.state === 6 ? 'Expired' : proposal.state === 7 ? 'Executed' : 'Unknown'}</strong></h5>
+                  
                   <div>
                     {proposal.votes.map(({ type, label }) => (
                       <div key={type}>
