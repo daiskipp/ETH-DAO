@@ -347,7 +347,7 @@ else if (hasClaimedNFT){
               {proposals.map((proposal) => (
                 <div key={proposal.proposalId.toString()} className="card">
                   <h5>{proposal.description} -- <strong style={{ color: 'red' }}>{proposal.state === 1 ? 'Active' : proposal.state === 2 ? 'Canceled' : proposal.state === 3 ? 'Defeated' : proposal.state === 4 ? 'Succeeded' : proposal.state === 5 ? 'Queued' : proposal.state === 6 ? 'Expired' : proposal.state === 7 ? 'Executed' : 'Unknown'}</strong></h5>
-                  
+                  <p>proposalId:{proposal.proposalId.toString()}</p>
                   <div>
                     {proposal.votes.map(({ type, label }) => (
                       <div key={type}>
@@ -365,6 +365,7 @@ else if (hasClaimedNFT){
                       </div>
                     ))}
                   </div>
+                  <hr />
                 </div>
               ))}
               <p></p>
